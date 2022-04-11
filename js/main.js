@@ -1,7 +1,17 @@
 const modalWindow = document.querySelector('.modal');
 const buttonsModal = document.querySelectorAll('.button-play');
-const iframe = document.querySelector('iframe');
 
+const stopVideos = function () {
+	const videos = document.querySelectorAll('iframe, video');
+	Array.prototype.forEach.call(videos, function (video) {
+		if (video.tagName.toLowerCase() === 'video') {
+			video.pause();
+		} else {
+			const src = video.src;
+			video.src = src;
+		}
+	});
+};
 
 
 buttonsModal.forEach((item, i) => {
@@ -12,6 +22,5 @@ buttonsModal.forEach((item, i) => {
 
 modalWindow.addEventListener('click', () => {
 	modalWindow.classList.remove('active');
-	document.querySelector('iframe').remove();
-	document.querySelector('.modal__inner').append(iframe);
+	stopVideos();
 });
